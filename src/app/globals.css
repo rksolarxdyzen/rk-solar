@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+:root {
+  /* RK Solar — logo blue + solar orange */
+  --primary: #3158a6;
+  --primary-hover: #274887;
+  --primary-light: #e8eef9;
+  --primary-faint: #f4f7fc;
+  --accent: #e87a1a;
+  --accent-hover: #c96612;
+  --accent-light: #fff0e4;
+  --accent-faint: #fff8f1;
+  --text-dark: #1d2d51;
+  --text-body: #35486f;
+  --text-muted: #6c7a99;
+  --text-light: #96a1b9;
+  --bg: #f4f7fc;
+  --bg-white: #ffffff;
+  --border: #d7dfef;
+  --border-light: #e9eef8;
+  --success: #1f8a4c;
+  --success-light: #e8f7ee;
+  --info: #287bb5;
+  --info-light: #e9f3fa;
+  --warn: #d97706;
+  --warn-light: #fff7ed;
+  --error: #c0392b;
+  --error-light: #fef2f1;
+  --critical: #9b1c1c;
+  --critical-light: #fef2f2;
+  --stage-new: #5872a6;
+  --stage-new-light: #e9eef8;
+  --radius: 10px;
+  --radius-xl: 16px;
+  --shadow: 0 1px 3px rgba(29, 45, 81, 0.06), 0 1px 2px rgba(29, 45, 81, 0.04);
+  --shadow-lg: 0 10px 40px rgba(29, 45, 81, 0.12);
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--primary-light);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --font-sans: var(--font-body), "Segoe UI", sans-serif;
+  --font-display: var(--font-display), Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text-body);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-slide-up {
+  animation: fade-slide-up 0.45s ease-out both;
+}
+
+.dashboard-hero {
+  isolation: isolate;
+}
+
+.kanban-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.kanban-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.kanban-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+.kanban-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes dashboard-shimmer {
+  from {
+    transform: translateX(-12%) rotate(8deg);
+    opacity: 0.35;
+  }
+  to {
+    transform: translateX(8%) rotate(8deg);
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-slide-up {
+    animation: none;
+  }
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "num": 1,
+    "name": "PV Solar Modules DCR",
+    "page": 1,
+    "image": "01-pv-solar-modules-dcr.png",
+    "image_count": 3
+  },
+  {
+    "num": 2,
+    "name": "Grid-Tie Solar Inverter",
+    "page": 1,
+    "image": "02-grid-tie-solar-inverter.png",
+    "image_count": 3
+  },
+  {
+    "num": 3,
+    "name": "Module Mounting Structure",
+    "page": 1,
+    "image": "03-module-mounting-structure.png",
+    "image_count": 1
+  },
+  {
+    "num": 4,
+    "name": "Nut-Bolt",
+    "page": 1,
+    "image": "04-nut-bolt.png",
+    "image_count": 2
+  },
+  {
+    "num": 5,
+    "name": "End & Mid Clamp",
+    "page": 1,
+    "image": "05-end-mid-clamp.png",
+    "image_count": 3
+  },
+  {
+    "num": 6,
+    "name": "Maintenance Free Chemical Earthing System",
+    "page": 1,
+    "image": "06-maintenance-free-chemical-earthing-system.png",
+    "image_count": 2
+  },
+  {
+    "num": 7,
+    "name": "Lightning Protection",
+    "page": 1,
+    "image": "07-lightning-protection.png",
+    "image_count": 1
+  },
+  {
+    "num": 8,
+    "name": "Solar DC Cables",
+    "page": 2,
+    "image": "08-solar-dc-cables.png",
+    "image_count": 1
+  },
+  {
+    "num": 9,
+    "name": "AC Cables",
+    "page": 2,
+    "image": "09-ac-cables.png",
+    "image_count": 2
+  },
+  {
+    "num": 10,
+    "name": "Earthing Cables",
+    "page": 2,
+    "image": "10-earthing-cables.png",
+    "image_count": 0
+  },
+  {
+    "num": 11,
+    "name": "Lightning Arrester Cable",
+    "page": 2,
+    "image": "11-lightning-arrester-cable.png",
+    "image_count": 1
+  },
+  {
+    "num": 12,
+    "name": "AC/DC Protection",
+    "page": 2,
+    "image": "12-ac-dc-protection.png",
+    "image_count": 3
+  },
+  {
+    "num": 13,
+    "name": "Cable Conduit Pipe",
+    "page": 2,
+    "image": "13-cable-conduit-pipe.png",
+    "image_count": 1
+  }
+]

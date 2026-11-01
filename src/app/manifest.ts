@@ -1,0 +1,40 @@
+import type { MetadataRoute } from "next";
+
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    name: "RK Solar",
+    short_name: "RK Solar",
+    description: "RK Solar staff CRM — leads, quotes, install, and field ops",
+    start_url: "/",
+    scope: "/",
+    display: "standalone",
+    background_color: "#ffffff",
+    theme_color: "#3158a6",
+    icons: [
+      {
+        src: "/brand/icon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/brand/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/brand/icon-192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "maskable",
+      },
+      {
+        src: "/brand/icon-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
+      },
+    ],
+  };
+}

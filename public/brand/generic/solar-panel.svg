@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
+  <rect width="220" height="220" fill="#f1f5f9"/>
+  <rect x="30" y="22" width="160" height="176" rx="6" fill="#cbd5e1"/>
+  <rect x="35" y="27" width="150" height="166" rx="3" fill="#1e3a8a"/>
+  <g fill="#1e40af" stroke="#93c5fd" stroke-width="1.2">
+    <rect x="39" y="31" width="34" height="37"/><rect x="75" y="31" width="34" height="37"/><rect x="111" y="31" width="34" height="37"/><rect x="147" y="31" width="34" height="37"/>
+    <rect x="39" y="70" width="34" height="37"/><rect x="75" y="70" width="34" height="37"/><rect x="111" y="70" width="34" height="37"/><rect x="147" y="70" width="34" height="37"/>
+    <rect x="39" y="109" width="34" height="37"/><rect x="75" y="109" width="34" height="37"/><rect x="111" y="109" width="34" height="37"/><rect x="147" y="109" width="34" height="37"/>
+    <rect x="39" y="148" width="34" height="41"/><rect x="75" y="148" width="34" height="41"/><rect x="111" y="148" width="34" height="41"/><rect x="147" y="148" width="34" height="41"/>
+  </g>
+  <path d="M39 31 L110 31 L39 110 Z" fill="#ffffff" opacity="0.08"/>
+</svg>

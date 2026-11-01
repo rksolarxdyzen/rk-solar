@@ -1,0 +1,3 @@
+-- Canonical demo dataset is supabase/mockdata.sql
+-- (covers every pipeline + customer + ops stage).
+-- Paste mockdata.sql into Supabase → SQL Editor → Run.

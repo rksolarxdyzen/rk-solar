@@ -1,0 +1,91 @@
+/** RK Solar brand tokens — quotation suite */
+
+export const BRAND = {
+  name: "RK Solar",
+  shortName: "RK Solar",
+  tagline: "Clean Energy. Clear Operations.",
+  coverTagline: "Solar Simplified",
+  heroLine1: "ENERGIZE TODAY,",
+  heroLine2: "SAVE MORE",
+  heroLine3: "TOMORROW.",
+  heroSub: "Smart Solar Solutions for a Sustainable Future.",
+  quotationLabel: "SOLAR ROOFTOP",
+  quotationTitle: "QUOTATION",
+  quotationTagline: "Powering Homes. Strengthening Futures.",
+  appName: "RK Solar — Quotations",
+  poweredBy: "Powered by Dyzen Solar Technologies",
+  logo: {
+    /** Empty = text wordmark; no company logo asset. */
+    primary: "",
+    width: 400,
+    height: 120,
+    icon: "",
+    iconWidth: 64,
+    iconHeight: 64,
+    login: "",
+    loginWidth: 200,
+    loginHeight: 60,
+    watermark: "",
+    coverHome: "/brand/cover-home.jpg",
+    nonSolarCover: "/brand/non-solar-cover.jpg",
+    /** Blank until RK Solar letterhead / QR is provided. */
+    paymentQr: "",
+  },
+  bank: {
+    accountName: "",
+    bankName: "",
+    accountNumber: "",
+    ifscCode: "",
+    accountType: "",
+    branch: "",
+    upiId: "",
+  },
+  contact: {
+    address: "",
+    phone: "",
+    email: "",
+    website: "",
+    customerCare: "",
+    branchesNote: "",
+    branches: [] as { label: string; address: string }[],
+  },
+  colors: {
+    blue: "#3158a6",
+    navy: "#3158a6",
+    orange: "#e87a1a",
+    grey: "#6B7280",
+    black: "#1e3970",
+    softBlue: "#E8F0FA",
+    headingBlue: "#3158a6",
+  },
+  benefits: [
+    { label: "Lower Electricity Bills", tone: "blue" },
+    { label: "High Performance Solar Systems", tone: "orange" },
+    { label: "Clean & Green Energy", tone: "green" },
+    { label: "Reliable & Durable", tone: "navy" },
+    { label: "Save More with Subsidy", tone: "indigo" },
+    { label: "Quality You Can Trust", tone: "olive" },
+  ],
+  services: [
+    { title: "DESIGN", sub: "Smart & Efficient" },
+    { title: "SUPPLY", sub: "Quality Assured" },
+    { title: "INSTALLATION", sub: "Safe & Reliable" },
+    { title: "COMMISSIONING", sub: "Performance Guaranteed" },
+  ],
+} as const;
+
+/** Tailwind-ready orange scale derived from #e87a1a */
+export const BRAND_PALETTE = {
+  orange: {
+    50: "#fff4eb",
+    100: "#ffe4cc",
+    200: "#ffc799",
+    300: "#f5a866",
+    400: "#ef9140",
+    500: "#e87a1a",
+    600: "#c96612",
+    700: "#a6530e",
+    800: "#84410b",
+    900: "#623008",
+  },
+} as const;
