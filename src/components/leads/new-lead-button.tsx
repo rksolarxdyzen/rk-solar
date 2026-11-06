@@ -88,7 +88,7 @@ export function NewLeadButton({
         open={open}
         onClose={() => setOpen(false)}
         title="New Lead"
-        subtitle="Capture enquiry for RK Solar"
+        subtitle="Capture enquiry for RK Bhabhor"
         size="lg"
       >
         <form onSubmit={handleSubmit} className="space-y-3">

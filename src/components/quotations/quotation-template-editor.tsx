@@ -565,7 +565,7 @@ export function QuotationTemplateEditor({ initial, company, bankDefaults, canEdi
                 value={form.thanksCompanyName}
                 onChange={(v) => setField("thanksCompanyName", v)}
                 disabled={!canEdit}
-                placeholder="RK Solar PVT LTD"
+                placeholder="RK Bhabhor"
               />
               <TextField
                 label="Address"
@@ -1013,7 +1013,7 @@ export function QuotationTemplateEditor({ initial, company, bankDefaults, canEdi
           <div className="mb-3">
             <h2 className="text-sm font-semibold text-[var(--text-dark)]">Live preview</h2>
             <p className="text-xs text-[var(--text-muted)]">
-              5-page RK solar proposal · sample quotation data
+              5-page RK Bhabhor solar proposal · sample quotation data
             </p>
           </div>
           <QuotationDocumentPreview data={previewData} company={previewCompany} template={form} canViewItemPricing />

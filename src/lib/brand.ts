@@ -1,10 +1,10 @@
-/** RK Solar brand constants (tenant). Platform credit: Dyzen. */
+/** RK Bhabhor brand constants (tenant). Platform credit: Dyzen. */
 export const BRAND = {
-  name: "RK Solar",
-  shortName: "RK Solar",
+  name: "RK Bhabhor",
+  shortName: "RK Bhabhor",
   tagline: "CRM & Field Operations",
   productLine: "Lead to maintenance — solar operations platform",
-  /** Discreet platform credit — keep RK Solar as the primary customer-facing brand. */
+  /** Discreet platform credit — keep RK Bhabhor as the primary customer-facing brand. */
   poweredBy: "Powered by Dyzen Solar Technologies",
   poweredByName: "Dyzen Solar Technologies",
 } as const;

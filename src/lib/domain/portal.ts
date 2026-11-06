@@ -108,7 +108,7 @@ export function portalInviteWhatsAppMessage(input: {
   return [
     `Hello ${input.customerName.trim() || "Customer"},`,
     "",
-    "Your RK Solar customer portal is ready.",
+    "Your RK Bhabhor customer portal is ready.",
     `Link: ${input.portalUrl}`,
     `Access code: ${input.portalCode}`,
     `Registered mobile: ${input.phone}`,

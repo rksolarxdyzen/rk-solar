@@ -72,7 +72,7 @@ export async function getCompany() {
   return data;
 }
 
-/** RK solar proposal template for the current company (falls back to defaults). */
+/** RK Bhabhor solar proposal template for the current company (falls back to defaults). */
 export async function loadSolarTemplate(): Promise<SolarProposalTemplate> {
   const profile = await getCurrentUser();
   if (!profile) return normalizeSolarTemplate(null);

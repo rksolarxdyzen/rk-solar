@@ -1,6 +1,6 @@
-# RK Solar
+# RK Bhabhor
 
-CRM & Field Operations platform for RK Solar (₹50k tier).
+CRM & Field Operations platform for RK Bhabhor (₹50k tier). Folder path remains `Apps/RK-Solar`.
 
 ## Status
 

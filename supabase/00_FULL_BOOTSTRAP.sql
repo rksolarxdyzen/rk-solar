@@ -1,5 +1,5 @@
 -- ============================================================
--- RK Solar — FULL BOOTSTRAP (one-shot)
+-- RK Bhabhor — FULL BOOTSTRAP (one-shot)
 -- Generated from Apps/RK-Solar/supabase/migrations/*.sql in name order.
 -- Run once on a NEW empty Supabase project (SQL Editor).
 --
@@ -7,11 +7,7 @@
 --   email:    admin@dyzensolar.com
 --   password: test@123
 --   role:     admin
---   company:  RK Solar (a0000000-0000-4000-8000-000000000001)
---
--- Fix notes:
---   - inventory authorities use sales_manager (KT enum), not Sumeru manager
---   - inventory_stock_on_hand recreated via DROP+CREATE when columns change
+--   company:  RK Bhabhor (a0000000-0000-4000-8000-000000000001)
 -- ============================================================
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
@@ -172,12 +168,12 @@ CREATE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE FUNCTION handle_new_user();
 
 -- ============================================================
--- SEED TENANT (RK Solar)
+-- SEED TENANT (RK Bhabhor)
 -- ============================================================
 INSERT INTO companies (id, name, slug, email)
 VALUES (
   'a0000000-0000-4000-8000-000000000001',
-  'RK Solar',
+  'RK Bhabhor',
   'rk-solar',
   'admin@dyzensolar.com'
 )
@@ -1199,7 +1195,7 @@ BEGIN
     cid,
     'RKS',
     'Prices inclusive of applicable GST unless noted. Validity 15 days. Payment as per agreed milestones.',
-    'RK Solar'
+    'RK Bhabhor'
   )
   ON CONFLICT (company_id) DO NOTHING;
 
@@ -10385,6 +10381,26 @@ GRANT EXECUTE ON FUNCTION inventory_search_movements(TEXT, TEXT, INT, INT) TO au
 -- END 087_inventory_movement_search_customer.sql
 
 -- ############################################################################
+-- BEGIN 088_rename_company_rk_bhabhor.sql
+-- ############################################################################
+
+-- Rename display tenant from RK Solar → RK Bhabhor (live catch-up).
+-- Slug stays rk-solar (technical / deploy identity).
+
+UPDATE public.companies
+SET name = 'RK Bhabhor'
+WHERE id = 'a0000000-0000-4000-8000-000000000001'
+  AND name IS DISTINCT FROM 'RK Bhabhor';
+
+UPDATE public.quotation_company_settings
+SET from_name = 'RK Bhabhor'
+WHERE company_id = 'a0000000-0000-4000-8000-000000000001'
+  AND (from_name IS NULL OR from_name = '' OR from_name = 'RK Solar');
+
+
+-- END 088_rename_company_rk_bhabhor.sql
+
+-- ############################################################################
 -- ADMIN BOOTSTRAP — auth.users + identity + profile role_id fix
 -- ############################################################################
 
@@ -10432,7 +10448,7 @@ BEGIN
     RAISE NOTICE 'Created Admin user: % (%)', v_email, v_uid;
   END IF;
 
-  UPDATE public.companies SET email = v_email WHERE id = v_company;
+  UPDATE public.companies SET email = v_email, name = 'RK Bhabhor' WHERE id = v_company;
 
   SELECT id INTO v_admin_role FROM public.roles WHERE company_id = v_company AND slug = 'admin' LIMIT 1;
 

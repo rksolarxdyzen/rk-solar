@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import { BRAND } from "@/lib/quotations/brand";
 
-/** Company mark: image when URL set, otherwise text wordmark (default for RK Solar). */
+/** Company mark: image when URL set, otherwise text wordmark (default for RK Bhabhor). */
 export function CompanyLogoMark({
   src,
   className = "",

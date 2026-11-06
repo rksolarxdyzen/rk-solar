@@ -1,8 +1,8 @@
-/** RK Solar brand tokens — quotation suite */
+/** RK Bhabhor brand tokens — quotation suite */
 
 export const BRAND = {
-  name: "RK Solar",
-  shortName: "RK Solar",
+  name: "RK Bhabhor",
+  shortName: "RK Bhabhor",
   tagline: "Clean Energy. Clear Operations.",
   coverTagline: "Solar Simplified",
   heroLine1: "ENERGIZE TODAY,",
@@ -12,7 +12,7 @@ export const BRAND = {
   quotationLabel: "SOLAR ROOFTOP",
   quotationTitle: "QUOTATION",
   quotationTagline: "Powering Homes. Strengthening Futures.",
-  appName: "RK Solar — Quotations",
+  appName: "RK Bhabhor — Quotations",
   poweredBy: "Powered by Dyzen Solar Technologies",
   logo: {
     /** Empty = text wordmark; no company logo asset. */
@@ -28,7 +28,7 @@ export const BRAND = {
     watermark: "",
     coverHome: "/brand/cover-home.jpg",
     nonSolarCover: "/brand/non-solar-cover.jpg",
-    /** Blank until RK Solar letterhead / QR is provided. */
+    /** Blank until RK Bhabhor letterhead / QR is provided. */
     paymentQr: "",
   },
   bank: {

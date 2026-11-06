@@ -12,7 +12,7 @@ export const AUTHORITIES = [
   {
     key: "full_access",
     label: "Full Access",
-    description: "Unrestricted access across RK Solar (overrides every other permission)",
+    description: "Unrestricted access across RK Bhabhor (overrides every other permission)",
     group: "general" as const,
   },
   {

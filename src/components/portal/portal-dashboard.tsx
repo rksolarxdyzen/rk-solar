@@ -301,7 +301,7 @@ function PortalReferrerCard({
       <div>
         <h2 className="font-semibold text-[var(--text-dark)]">Reference person</h2>
         <p className="mt-1 text-sm text-[var(--text-muted)]">
-          Optional — who referred you to RK Solar?
+          Optional — who referred you to RK Bhabhor?
         </p>
       </div>
       <div className="space-y-3">

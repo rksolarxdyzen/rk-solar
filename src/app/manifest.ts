@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "RK Solar",
-    short_name: "RK Solar",
-    description: "RK Solar staff CRM — leads, quotes, install, and field ops",
+    name: "RK Bhabhor",
+    short_name: "RK Bhabhor",
+    description: "RK Bhabhor staff CRM — leads, quotes, install, and field ops",
     start_url: "/",
     scope: "/",
     display: "standalone",

@@ -282,7 +282,7 @@ BEGIN
     cid,
     'RKS',
     'Prices inclusive of applicable GST unless noted. Validity 15 days. Payment as per agreed milestones.',
-    'RK Solar'
+    'RK Bhabhor'
   )
   ON CONFLICT (company_id) DO NOTHING;
 

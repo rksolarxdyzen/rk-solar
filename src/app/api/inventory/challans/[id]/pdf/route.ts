@@ -16,7 +16,7 @@ export const runtime = "nodejs";
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 async function loadLogo(request: NextRequest): Promise<ChallanDocProps["logo"]> {
-  // RK Solar is text-branded — no company logo asset.
+  // RK Bhabhor is text-branded — no company logo asset.
   const primary = BRAND.logo.primary?.trim();
   if (!primary) return null;
   try {

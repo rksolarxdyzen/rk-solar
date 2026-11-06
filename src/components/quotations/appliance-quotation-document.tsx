@@ -153,7 +153,7 @@ export function ApplianceQuotationDocument({
                   <img
                     className="aq-qr"
                     src={qrAccount.qrUrl}
-                    alt="Scan to pay RK Solar"
+                    alt="Scan to pay RK Bhabhor"
                   />
                 </div>
               ) : null}

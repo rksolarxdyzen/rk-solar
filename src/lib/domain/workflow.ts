@@ -1,4 +1,4 @@
-/** RK Solar — LMS sales workflow constants */
+/** RK Bhabhor — LMS sales workflow constants */
 
 export const SALES_STAGES = [
   "new_lead",

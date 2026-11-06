@@ -146,7 +146,7 @@ export function AppShell({
       <div className="min-h-screen bg-transparent">
         <header className="sticky top-0 z-40 overflow-visible border-b border-[var(--border)] bg-white/95 backdrop-blur">
           <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 overflow-visible px-4 sm:px-6">
-            <SoftLink href="/" aria-label="RK Solar — Home">
+            <SoftLink href="/" aria-label="RK Bhabhor — Home">
               <BrandMark />
             </SoftLink>
             <div className="relative z-[45] flex items-center gap-2 overflow-visible sm:gap-3">

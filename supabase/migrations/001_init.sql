@@ -148,12 +148,12 @@ CREATE TRIGGER on_auth_user_created
   FOR EACH ROW EXECUTE FUNCTION handle_new_user();
 
 -- ============================================================
--- SEED TENANT (RK Solar)
+-- SEED TENANT (RK Bhabhor)
 -- ============================================================
 INSERT INTO companies (id, name, slug, email)
 VALUES (
   'a0000000-0000-4000-8000-000000000001',
-  'RK Solar',
+  'RK Bhabhor',
   'rk-solar',
   'admin@rksolar.local'
 )

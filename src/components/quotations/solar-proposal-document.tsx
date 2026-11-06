@@ -387,7 +387,7 @@ export function SolarProposalDocument({
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={qrAccount.qrUrl}
-                      alt="Scan to pay RK Solar"
+                      alt="Scan to pay RK Bhabhor"
                       className="sp-qr-reference"
                     />
                     {qrAccount.upiId ? (
