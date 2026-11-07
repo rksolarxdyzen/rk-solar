@@ -13,6 +13,11 @@ async function requireCatalogManage() {
   return ctx;
 }
 
+/** Postgrest errors are plain objects — throw Error so clients get a readable message. */
+function throwDb(error: { message?: string } | null | undefined): never {
+  throw new Error(error?.message?.trim() || "Database request failed");
+}
+
 const moduleTypeSchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().min(1),
@@ -330,7 +335,7 @@ export async function upsertRateInverter(input: unknown) {
       .eq("company_id", companyId)
       .select(selectCols)
       .single();
-    if (error) throw error;
+    if (error) throwDb(error);
     revalidatePath("/catalog");
     return updated;
   }
@@ -340,7 +345,7 @@ export async function upsertRateInverter(input: unknown) {
     .insert(row)
     .select(selectCols)
     .single();
-  if (error) throw error;
+  if (error) throwDb(error);
   revalidatePath("/catalog");
   return inserted;
 }
@@ -352,6 +357,6 @@ export async function deleteRateInverter(id: string) {
     .delete()
     .eq("id", id)
     .eq("company_id", companyId);
-  if (error) throw error;
+  if (error) throwDb(error);
   revalidatePath("/catalog");
 }
