@@ -33,12 +33,11 @@ import {
 } from "@/lib/quotations/catalog-items";
 import type { RateCardPanel } from "@/lib/quotations/rate-card-panels";
 import { panelCapacityLabel } from "@/lib/quotations/rate-card-panels";
-import { parseInverterSizeKw } from "@/lib/quotations/rate-card-inverters";
 import {
-  isInverterBrand,
-  normalizeInverterBrand,
-  type InverterBrand,
-} from "@/lib/quotations/inverter-brand";
+  parseInverterSizeKw,
+  type RateCardInverter,
+} from "@/lib/quotations/rate-card-inverters";
+import { normalizeInverterBrand } from "@/lib/quotations/inverter-brand";
 import { calcPerKwQuotePricing } from "@/lib/quotations/per-kw-pricing";
 import {
   calcQuotationSubsidy,
@@ -118,14 +117,15 @@ function findPanelFromDefaults(
 }
 
 function findInverterFromDefaults(defaults?: Partial<QuotationPayload>): {
-  inverterTypeName: InverterBrand | "";
+  inverterTypeName: string;
   inverterSizeLabel: string;
 } {
   const invLine = (defaults?.items ?? []).find((row) => /inverter/i.test(row.itemName));
-  const typeName: InverterBrand | "" =
-    normalizeInverterBrand(defaults?.inverterTypeName) ||
-    normalizeInverterBrand(invLine?.brand) ||
+  const rawName =
+    defaults?.inverterTypeName?.trim() ||
+    invLine?.brand?.trim() ||
     "";
+  const typeName = normalizeInverterBrand(rawName) || rawName;
   const sizeLabel =
     defaults?.inverterSizeLabel?.trim() || invLine?.model?.trim() || "";
   return {
@@ -137,6 +137,7 @@ function findInverterFromDefaults(defaults?: Partial<QuotationPayload>): {
 export function QuotationBuilderForm({
   catalog,
   panels,
+  inverters = [],
   leads = [],
   canAddLead = false,
   defaultValues,
@@ -147,8 +148,7 @@ export function QuotationBuilderForm({
 }: {
   catalog: CatalogItem[];
   panels: RateCardPanel[];
-  /** @deprecated Catalog inverters unused — brand toggle + free-text size */
-  inverters?: unknown[];
+  inverters?: RateCardInverter[];
   leads?: QuoteLeadOption[];
   canAddLead?: boolean;
   defaultValues?: Partial<QuotationPayload> & { id?: string };
@@ -189,7 +189,7 @@ export function QuotationBuilderForm({
   const [panelCount, setPanelCount] = useState(initialRate.panelCount);
   const [moduleTypeName, setModuleTypeName] = useState(initialRate.panelName);
   const [moduleCapacityLabel, setModuleCapacityLabel] = useState(initialRate.moduleCapacityLabel);
-  const [inverterTypeName, setInverterTypeName] = useState<InverterBrand | "">(
+  const [inverterTypeName, setInverterTypeName] = useState(
     initialInverter.inverterTypeName
   );
   const [inverterSizeLabelState, setInverterSizeLabelState] = useState(
@@ -466,7 +466,7 @@ export function QuotationBuilderForm({
       panelCount > 0 &&
       systemSizeKw > 0 &&
       systemCost > 0 &&
-      isInverterBrand(inverterTypeName) &&
+      inverterTypeName.trim() &&
       inverterSizeLabelState.trim() &&
       meterPhase &&
       (!isCommercial || panelMountType) &&
@@ -482,7 +482,7 @@ export function QuotationBuilderForm({
     if (!panelId) missing.push("panel");
     if (!(panelCount > 0)) missing.push("panel count");
     if (!(systemSizeKw > 0) || !(systemCost > 0)) missing.push("system pricing");
-    if (!isInverterBrand(inverterTypeName)) missing.push("inverter make");
+    if (!inverterTypeName.trim()) missing.push("inverter");
     if (!inverterSizeLabelState.trim()) missing.push("inverter size");
     if (!meterPhase) missing.push("meter phase");
     if (isCommercial && !panelMountType) missing.push("panel mount option");
@@ -801,6 +801,7 @@ export function QuotationBuilderForm({
           >
             <SystemDetailsPanel
               panels={panels}
+              inverters={inverters}
               projectType={parseProjectType(projectType)}
               quoteTier={quoteTier}
               subsidyScheme={subsidyScheme}

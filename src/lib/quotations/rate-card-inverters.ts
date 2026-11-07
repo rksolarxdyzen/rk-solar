@@ -29,6 +29,9 @@ export function filterInvertersByQuery(inverters: RateCardInverter[], query: str
 }
 
 export function parseInverterSizeKw(sizeLabel: string): number {
-  const match = sizeLabel.match(/(\d+(?:\.\d+)?)\s*kw/i);
-  return match ? Number(match[1]) : 0;
+  const withUnit = sizeLabel.match(/(\d+(?:\.\d+)?)\s*kw/i);
+  if (withUnit) return Number(withUnit[1]);
+  // Catalog sizes are often entered as bare numbers (e.g. "3" meaning 3 kW).
+  const bare = sizeLabel.trim().match(/^(\d+(?:\.\d+)?)$/);
+  return bare ? Number(bare[1]) : 0;
 }

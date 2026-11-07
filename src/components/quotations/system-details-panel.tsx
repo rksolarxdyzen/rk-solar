@@ -1,13 +1,18 @@
 "use client";
 
+import { useMemo } from "react";
 import type { RateCardPanel } from "@/lib/quotations/rate-card-panels";
 import { panelCapacityLabel } from "@/lib/quotations/rate-card-panels";
-import { parseInverterSizeKw } from "@/lib/quotations/rate-card-inverters";
-import type { InverterBrand } from "@/lib/quotations/inverter-brand";
+import {
+  parseInverterSizeKw,
+  type RateCardInverter,
+} from "@/lib/quotations/rate-card-inverters";
+import { isInverterBrand, type InverterBrand } from "@/lib/quotations/inverter-brand";
 import type { QuoteTier } from "@/components/quotations/quote-tier-toggle";
 import { getPerKwRate } from "@/lib/quotations/per-kw-pricing";
 import { PanelSearchPicker } from "@/components/quotations/panel-search-picker";
 import { InverterBrandPicker } from "@/components/quotations/inverter-brand-picker";
+import { InverterSearchPicker } from "@/components/quotations/inverter-search-picker";
 import { Input } from "@/components/ui/input";
 import { inr } from "@/lib/quotations/format";
 import { SUBSIDY_SCHEME_LABELS, type SubsidyScheme } from "@/lib/quotations/subsidy";
@@ -25,6 +30,7 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
 
 export function SystemDetailsPanel({
   panels,
+  inverters = [],
   projectType,
   quoteTier = "premium",
   subsidyScheme = "residential",
@@ -46,6 +52,7 @@ export function SystemDetailsPanel({
   showPricing = true,
 }: {
   panels: RateCardPanel[];
+  inverters?: RateCardInverter[];
   projectType: ProjectType;
   quoteTier?: QuoteTier;
   subsidyScheme?: SubsidyScheme;
@@ -56,18 +63,32 @@ export function SystemDetailsPanel({
   systemSizeKw: number;
   panelCount: number;
   ratePerKw?: number;
-  inverterBrand: InverterBrand | "";
+  inverterBrand: string;
   inverterSize: string;
   panelMountType?: PanelMountType | null;
   onPanelChange: (id: string) => void;
   onPanelCountChange?: (count: number) => void;
-  onInverterBrandChange: (brand: InverterBrand) => void;
+  onInverterBrandChange: (brand: string) => void;
   onInverterSizeChange: (size: string) => void;
   onPanelMountTypeChange?: (mount: PanelMountType) => void;
   showPricing?: boolean;
 }) {
   const isCommercial = projectType === "commercial";
   const inverterKw = inverterSize ? parseInverterSizeKw(inverterSize) : 0;
+  const useCatalogInverters = inverters.some((inv) => inv.is_active);
+  const selectedInverterId = useMemo(() => {
+    if (!useCatalogInverters || !inverterBrand.trim()) return "";
+    const exact = inverters.find(
+      (inv) =>
+        inv.is_active &&
+        inv.inverter_name === inverterBrand &&
+        inv.inverter_size === inverterSize
+    );
+    if (exact) return exact.id;
+    return (
+      inverters.find((inv) => inv.is_active && inv.inverter_name === inverterBrand)?.id ?? ""
+    );
+  }, [useCatalogInverters, inverters, inverterBrand, inverterSize]);
 
   const selectedPanel = panels.find((p) => p.id === panelId) ?? null;
   const activeRatePerKw =
@@ -192,12 +213,51 @@ export function SystemDetailsPanel({
         </div>
       )}
 
-      <InverterBrandPicker
-        brand={inverterBrand}
-        size={inverterSize}
-        onBrandChange={onInverterBrandChange}
-        onSizeChange={onInverterSizeChange}
-      />
+      {useCatalogInverters ? (
+        <div className="space-y-4">
+          <div>
+            <FieldLabel>Inverter</FieldLabel>
+            <InverterSearchPicker
+              inverters={inverters}
+              value={selectedInverterId}
+              onChange={(id) => {
+                const inv = inverters.find((row) => row.id === id);
+                if (!inv) {
+                  onInverterBrandChange("");
+                  onInverterSizeChange("");
+                  return;
+                }
+                onInverterBrandChange(inv.inverter_name);
+                onInverterSizeChange(inv.inverter_size);
+              }}
+            />
+            {!inverterBrand.trim() && (
+              <p className="mt-1.5 text-xs text-red-600">Select an inverter from the catalog.</p>
+            )}
+          </div>
+          <div className="max-w-md">
+            <FieldLabel>Inverter size (shown on quote)</FieldLabel>
+            <Input
+              type="text"
+              value={inverterSize}
+              onChange={(e) => onInverterSizeChange(e.target.value)}
+              placeholder="e.g. 5 kW, 8 kW three phase"
+              className="min-h-11"
+              autoComplete="off"
+            />
+            <p className="mt-1.5 text-xs text-slate-500">
+              Filled from Catalog → Inverters; you can tweak the label for this quote.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <InverterBrandPicker
+          brand={isInverterBrand(inverterBrand) ? (inverterBrand as InverterBrand) : ""}
+          size={inverterSize}
+          onBrandChange={onInverterBrandChange}
+          onSizeChange={onInverterSizeChange}
+        />
+      )}
       {inverterBrand && inverterSize.trim() && inverterKw > 0 && (
         <p className="text-xs text-slate-500">Parsed capacity: ≈ {inverterKw} kW</p>
       )}
