@@ -28,6 +28,7 @@ export const BRAND = {
     watermark: "",
     coverHome: "/brand/cover-home.jpg",
     nonSolarCover: "/brand/non-solar-cover.jpg",
+    stamp: "/brand/stamp.svg",
     /** Blank until RK Bhabhor letterhead / QR is provided. */
     paymentQr: "",
   },

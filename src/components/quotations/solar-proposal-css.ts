@@ -621,6 +621,21 @@ export const SOLAR_PROPOSAL_CSS = `
 }
 .sp-contact-value { font-weight: 600; line-height: 1.35; }
 
+.sp-company-stamp {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  margin: 12px auto 0;
+}
+.sp-company-stamp img {
+  display: block;
+  width: 120px;
+  height: auto;
+  max-height: 102px;
+  object-fit: contain;
+}
+
 .sp-branches-section { margin-top: 16px; }
 .sp-branches-heading {
   margin: 0 0 12px;

@@ -755,6 +755,13 @@ export function SolarProposalDocument({
             ) : null}
           </div>
 
+          {BRAND.logo.stamp ? (
+            <div className="sp-company-stamp">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={BRAND.logo.stamp} alt={`${BRAND.name} stamp`} />
+            </div>
+          ) : null}
+
           {thanksBranches.length > 0 ? (
             <div className="sp-branches-section">
               <h3 className="sp-branches-heading">{template.thanksBranchesHeading}</h3>
