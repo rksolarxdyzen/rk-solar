@@ -703,6 +703,13 @@ export function SolarProposalDocument({
           />
           <div className="sp-thanks-msg">{template.thanksMessage}</div>
 
+          {BRAND.logo.stamp ? (
+            <div className="sp-company-stamp">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={BRAND.logo.stamp} alt={`${BRAND.name} stamp`} />
+            </div>
+          ) : null}
+
           <div className="sp-thanks-contact-card">
             <h2 className="sp-thanks-company">{thanksCompany}</h2>
             <div className="sp-thanks-contact-grid">
@@ -754,13 +761,6 @@ export function SolarProposalDocument({
               </div>
             ) : null}
           </div>
-
-          {BRAND.logo.stamp ? (
-            <div className="sp-company-stamp">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={BRAND.logo.stamp} alt={`${BRAND.name} stamp`} />
-            </div>
-          ) : null}
 
           {thanksBranches.length > 0 ? (
             <div className="sp-branches-section">

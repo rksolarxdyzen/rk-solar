@@ -626,13 +626,13 @@ export const SOLAR_PROPOSAL_CSS = `
   z-index: 10;
   display: flex;
   justify-content: center;
-  margin: 12px auto 0;
+  margin: 0 auto 10px;
 }
 .sp-company-stamp img {
   display: block;
-  width: 120px;
+  width: 220px;
   height: auto;
-  max-height: 102px;
+  max-height: 200px;
   object-fit: contain;
 }
 
