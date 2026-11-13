@@ -630,9 +630,9 @@ export const SOLAR_PROPOSAL_CSS = `
 }
 .sp-company-stamp img {
   display: block;
-  width: 220px;
+  width: 320px;
   height: auto;
-  max-height: 200px;
+  max-height: 280px;
   object-fit: contain;
 }
 
