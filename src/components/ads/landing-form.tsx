@@ -5,6 +5,11 @@ import { useSearchParams } from "next/navigation";
 import { ADS_LANDING } from "@/lib/ads/landing-copy";
 import { CAPACITY_INTERESTS } from "@/lib/ads/types";
 
+const fieldClass =
+  "w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-800 outline-none transition focus:border-[#3158a6] focus:shadow-[0_0_0_3px_rgba(49,88,166,0.15)]";
+
+const labelClass = "mb-1 block text-sm font-medium text-slate-700";
+
 export function LandingForm() {
   const searchParams = useSearchParams();
   const [pending, startTransition] = useTransition();
@@ -56,14 +61,10 @@ export function LandingForm() {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-white/20 bg-white/95 px-6 py-10 text-center shadow-xl backdrop-blur">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#e87a1a]">
-          {ADS_LANDING.shortBrand}
-        </p>
-        <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl font-semibold text-[#1e3970]">
-          {ADS_LANDING.successTitle}
-        </h2>
-        <p className="mt-3 text-sm text-slate-600">{ADS_LANDING.successBody}</p>
+      <div className="rounded-xl border border-slate-200 bg-white px-5 py-8 text-center shadow-lg">
+        <p className="text-sm font-semibold text-[#e87a1a]">{ADS_LANDING.shortBrand}</p>
+        <h2 className="mt-2 text-2xl font-bold text-[#1e3970]">{ADS_LANDING.successTitle}</h2>
+        <p className="mt-2 text-base text-slate-600">{ADS_LANDING.successBody}</p>
       </div>
     );
   }
@@ -72,15 +73,11 @@ export function LandingForm() {
     <form
       id="enquiry"
       onSubmit={onSubmit}
-      className="rounded-2xl border border-white/25 bg-white/95 p-6 shadow-xl backdrop-blur sm:p-7"
+      className="rounded-xl border border-slate-200 bg-white p-5 shadow-lg sm:p-6"
     >
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#3158a6]">
-        Free consultation
-      </p>
-      <h2 className="mt-1 font-[family-name:var(--font-display)] text-2xl font-semibold text-[#1e3970]">
-        {ADS_LANDING.formTitle}
-      </h2>
-      <p className="mt-1 text-sm text-slate-600">{ADS_LANDING.formSub}</p>
+      <p className="text-sm font-semibold text-[#3158a6]">Free consultation</p>
+      <h2 className="mt-1 text-xl font-bold text-[#1e3970] sm:text-2xl">{ADS_LANDING.formTitle}</h2>
+      <p className="mt-1 text-sm leading-relaxed text-slate-600">{ADS_LANDING.formSub}</p>
 
       {error ? (
         <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
@@ -88,50 +85,29 @@ export function LandingForm() {
         </div>
       ) : null}
 
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <label className="block sm:col-span-2">
-          <span className="mb-1 block text-[0.7rem] font-semibold uppercase tracking-wider text-slate-500">
-            Name *
-          </span>
-          <input
-            name="name"
-            required
-            autoComplete="name"
-            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-[#3158a6] focus:shadow-[0_0_0_3px_rgba(49,88,166,0.15)]"
-          />
+          <span className={labelClass}>Name *</span>
+          <input name="name" required autoComplete="name" className={fieldClass} />
         </label>
         <label className="block">
-          <span className="mb-1 block text-[0.7rem] font-semibold uppercase tracking-wider text-slate-500">
-            Mobile *
-          </span>
+          <span className={labelClass}>Mobile *</span>
           <input
             name="phone"
             required
             inputMode="tel"
             autoComplete="tel"
             placeholder="10-digit mobile"
-            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-[#3158a6] focus:shadow-[0_0_0_3px_rgba(49,88,166,0.15)]"
+            className={fieldClass}
           />
         </label>
         <label className="block">
-          <span className="mb-1 block text-[0.7rem] font-semibold uppercase tracking-wider text-slate-500">
-            City
-          </span>
-          <input
-            name="city"
-            autoComplete="address-level2"
-            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-[#3158a6] focus:shadow-[0_0_0_3px_rgba(49,88,166,0.15)]"
-          />
+          <span className={labelClass}>City</span>
+          <input name="city" autoComplete="address-level2" className={fieldClass} />
         </label>
         <label className="block sm:col-span-2">
-          <span className="mb-1 block text-[0.7rem] font-semibold uppercase tracking-wider text-slate-500">
-            System size
-          </span>
-          <select
-            name="capacityInterest"
-            defaultValue=""
-            className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-[#3158a6] focus:shadow-[0_0_0_3px_rgba(49,88,166,0.15)]"
-          >
+          <span className={labelClass}>System size</span>
+          <select name="capacityInterest" defaultValue="" className={fieldClass}>
             {CAPACITY_INTERESTS.map((opt) => (
               <option key={opt.value || "unset"} value={opt.value}>
                 {opt.label}
@@ -140,16 +116,9 @@ export function LandingForm() {
           </select>
         </label>
         <label className="block sm:col-span-2">
-          <span className="mb-1 block text-[0.7rem] font-semibold uppercase tracking-wider text-slate-500">
-            Message
-          </span>
-          <textarea
-            name="message"
-            rows={3}
-            className="w-full resize-none rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm outline-none transition focus:border-[#3158a6] focus:shadow-[0_0_0_3px_rgba(49,88,166,0.15)]"
-          />
+          <span className={labelClass}>Message</span>
+          <textarea name="message" rows={3} className={`${fieldClass} resize-none`} />
         </label>
-        {/* Honeypot */}
         <label className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden>
           Website
           <input name="website" tabIndex={-1} autoComplete="off" />
@@ -159,7 +128,7 @@ export function LandingForm() {
       <button
         type="submit"
         disabled={pending}
-        className="mt-5 w-full rounded-xl bg-[#e87a1a] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#c96612] disabled:opacity-60"
+        className="mt-4 w-full rounded-lg bg-[#e87a1a] px-4 py-3 text-base font-semibold text-white transition hover:bg-[#c96612] disabled:opacity-60"
       >
         {pending ? "Sending…" : ADS_LANDING.ctaPrimary}
       </button>
