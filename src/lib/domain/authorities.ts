@@ -82,6 +82,12 @@ export const AUTHORITIES = [
     group: "sales" as const,
   },
   {
+    key: "view_ad_submissions",
+    label: "View ad campaign enquiries",
+    description: "Open /ads inbox for landing-page form submissions and CSV export",
+    group: "sales" as const,
+  },
+  {
     key: "log_sales_activity",
     label: "Log sales activity",
     description: "Log calls, visits, and follow-ups on leads",
@@ -437,6 +443,7 @@ export const AUTHORITY_UI_SECTIONS: readonly AuthorityUiSectionDef[] = [
     hint: "/pipeline ┬╖ /customers ┬╖ /lead-import",
     keys: [
       "view_all_leads",
+      "view_ad_submissions",
       "add_edit_leads",
       "delete_leads",
       "move_lead_stage",
@@ -652,6 +659,7 @@ export const DEFAULT_ROLE_AUTHORITIES: Record<string, AuthorityKey[]> = {
     "import_leads",
     "distribute_leads",
     "add_edit_leads",
+    "view_ad_submissions",
     "move_lead_stage",
     "reassign_leads",
     "reopen_lost_leads",
@@ -678,6 +686,7 @@ export const DEFAULT_ROLE_AUTHORITIES: Record<string, AuthorityKey[]> = {
     "approve_dealer_commission",
     "assign_dealer",
   ],
+  "ad-campaign": ["view_ad_submissions"],
   sales_executive: [
     "add_edit_leads",
     "move_lead_stage",

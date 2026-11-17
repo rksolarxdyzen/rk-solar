@@ -24,4 +24,5 @@ export const ROLE_LABELS: Record<string, string> = {
   service_supervisor: "Service Supervisor",
   dealer: "Dealer",
   customer: "Customer",
+  "ad-campaign": "Ad Campaign",
 };

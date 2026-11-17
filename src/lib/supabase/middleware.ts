@@ -12,9 +12,12 @@ export async function updateSession(request: NextRequest) {
   } catch {
     if (
       request.nextUrl.pathname.startsWith("/login") ||
+      request.nextUrl.pathname.startsWith("/ads/login") ||
+      request.nextUrl.pathname.startsWith("/go") ||
       request.nextUrl.pathname.startsWith("/r/") ||
       request.nextUrl.pathname.startsWith("/portal") ||
       request.nextUrl.pathname.startsWith("/api/ingest/") ||
+      request.nextUrl.pathname.startsWith("/api/ads/submit") ||
       request.nextUrl.pathname.startsWith("/api/cron/")
     ) {
       return supabaseResponse;
@@ -46,10 +49,14 @@ export async function updateSession(request: NextRequest) {
 
   const path = request.nextUrl.pathname;
   const isAuthPage = path.startsWith("/login");
+  const isAdsLogin = path.startsWith("/ads/login");
+  const isAdsSurface = path === "/ads" || path.startsWith("/ads/");
   const isAuthCallback = path.startsWith("/auth/");
+  const isPublicLanding = path === "/go" || path.startsWith("/go/");
   const isPublicReferral = path.startsWith("/r/");
   const isPublicPortal = path.startsWith("/portal");
   const isIngestApi = path.startsWith("/api/ingest/");
+  const isAdsSubmitApi = path.startsWith("/api/ads/submit");
   const isCronApi = path.startsWith("/api/cron/");
   const isPwaAsset =
     path === "/manifest.webmanifest" ||
@@ -61,16 +68,25 @@ export async function updateSession(request: NextRequest) {
     path === "/brand/apple-touch-icon.png";
   const isPublic =
     isAuthPage ||
+    isAdsLogin ||
+    isPublicLanding ||
     isAuthCallback ||
     isPublicReferral ||
     isPublicPortal ||
     isIngestApi ||
+    isAdsSubmitApi ||
     isCronApi ||
     isPwaAsset;
 
   if (!user && !isPublic) {
     const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/login";
+    redirectUrl.pathname = isAdsSurface ? "/ads/login" : "/login";
+    return NextResponse.redirect(redirectUrl);
+  }
+
+  if (user && isAdsLogin) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = "/ads";
     return NextResponse.redirect(redirectUrl);
   }
 

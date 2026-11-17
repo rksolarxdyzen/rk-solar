@@ -1,6 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { isAdsOnlyUser } from "@/lib/ads/access";
+import { getUserAuthorities } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 
 export async function signIn(formData: FormData): Promise<{ error: string } | void> {
@@ -50,7 +52,8 @@ export async function signIn(formData: FormData): Promise<{ error: string } | vo
     return { error: "Your account is deactivated. Contact your administrator." };
   }
 
-  redirect("/");
+  const authorities = await getUserAuthorities(profile.id);
+  redirect(isAdsOnlyUser(authorities) ? "/ads" : "/");
 }
 
 export async function signOut() {
