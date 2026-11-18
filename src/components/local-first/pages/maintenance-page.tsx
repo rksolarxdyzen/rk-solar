@@ -5,10 +5,10 @@ import {
   listServiceEngineers,
   listServiceTickets,
 } from "@/actions/tickets";
-import { getCustomers } from "@/actions/leads";
 import { MaintenanceWorkspace } from "@/components/maintenance/maintenance-workspace";
 import { useLocalFirstSession } from "@/components/local-first/local-first-session";
 import { hasAuth, roleIn } from "@/lib/local-first/access";
+import { customersOptions } from "@/lib/local-first/queries";
 
 export default function MaintenancePage() {
   const { profile, authorities, companyId } = useLocalFirstSession();
@@ -44,15 +44,7 @@ export default function MaintenancePage() {
     enabled: canView && canForceAssign,
   });
   const customersQ = useQuery({
-    queryKey: ["rk", "customers", companyId, null] as const,
-    queryFn: async () => {
-      const customers = await getCustomers();
-      return customers.map((c) => ({
-        id: c.id,
-        name: c.name,
-        phone: c.phone,
-      }));
-    },
+    ...customersOptions(companyId, null),
     enabled: canView && !ticketsQ.isError,
   });
 
@@ -91,6 +83,12 @@ export default function MaintenancePage() {
         </div>
       );
     }
+    return (
+      <div className="rounded-xl border border-[var(--error)]/30 bg-[var(--error-light)] p-6 text-sm text-[var(--text-dark)]">
+        <p className="font-semibold">Couldn’t load service tickets</p>
+        <p className="mt-2 text-[var(--text-body)]">{message}</p>
+      </div>
+    );
   }
 
   if (ticketsQ.isPending && !ticketsQ.data) {
@@ -105,7 +103,11 @@ export default function MaintenancePage() {
         >[0]["tickets"]
       }
       engineers={engineersQ.data ?? []}
-      customers={customersQ.data ?? []}
+      customers={(customersQ.data?.customers ?? []).map((c) => ({
+        id: c.id,
+        name: c.name,
+        phone: c.phone,
+      }))}
       companyId={profile.company_id}
       profileId={profile.id}
       canAccept={canAccept}

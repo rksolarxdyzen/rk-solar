@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Component,
   createContext,
   Suspense,
   lazy,
@@ -10,6 +11,7 @@ import {
   useMemo,
   useState,
   type ComponentType,
+  type ErrorInfo,
   type ReactNode,
 } from "react";
 import { usePathname } from "next/navigation";
@@ -76,6 +78,57 @@ const lazyPages: Record<string, React.LazyExoticComponent<ComponentType>> =
   Object.fromEntries(
     Object.entries(loaders).map(([path, load]) => [path, lazy(load)])
   );
+
+class RkPageErrorBoundary extends Component<
+  { children: ReactNode; resetKey: string },
+  { error: Error | null }
+> {
+  state = { error: null as Error | null };
+
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error(error, info.componentStack);
+  }
+
+  componentDidUpdate(prevProps: { resetKey: string }) {
+    if (prevProps.resetKey !== this.props.resetKey && this.state.error) {
+      this.setState({ error: null });
+    }
+  }
+
+  render() {
+    if (this.state.error) {
+      const message = this.state.error.message?.slice(0, 240);
+      return (
+        <div className="mx-auto max-w-lg space-y-4 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-[var(--text-dark)]">
+            Something went wrong
+          </h2>
+          <p className="text-sm text-[var(--text-body)]">
+            This screen failed to render. Try again, or open another page from
+            the menu.
+          </p>
+          {message ? (
+            <p className="break-all rounded-lg bg-[var(--bg)] px-3 py-2 font-mono text-xs text-[var(--text-muted)]">
+              {message}
+            </p>
+          ) : null}
+          <button
+            type="button"
+            className="rounded-lg bg-[var(--primary)] px-4 py-2 text-sm font-semibold text-white"
+            onClick={() => this.setState({ error: null })}
+          >
+            Try again
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 function RkLoadingFallback() {
   return (
@@ -167,9 +220,11 @@ export function RkClientOutlet({ children }: { children: ReactNode }) {
       : null;
   if (!Page) return <>{children}</>;
   return (
-    <Suspense fallback={<RkLoadingFallback />}>
-      <Page />
-    </Suspense>
+    <RkPageErrorBoundary resetKey={path}>
+      <Suspense fallback={<RkLoadingFallback />}>
+        <Page />
+      </Suspense>
+    </RkPageErrorBoundary>
   );
 }
 

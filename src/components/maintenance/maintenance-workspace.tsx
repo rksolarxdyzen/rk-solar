@@ -428,7 +428,7 @@ export function MaintenanceWorkspace({
             <Label>Customer</Label>
             <Select value={raiseLeadId} onChange={(e) => setRaiseLeadId(e.target.value)}>
               <option value="">Select customer</option>
-              {customers.map((c) => (
+              {(Array.isArray(customers) ? customers : []).map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.name} · {c.phone}
                 </option>
